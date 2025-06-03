@@ -1,0 +1,130 @@
+# Computer Vision API Development Rules
+
+## Core CV/ML Patterns
+
+# PyTorch Model Management
+- Always use torch.jit.script for model optimization in production
+- Implement proper device management (CPU/GPU) with torch.cuda.is_available()
+- Use torch.no_grad() for inference to save memory
+- Implement model caching with proper memory management
+- Always validate input tensor shapes and types before inference
+
+# Image Processing Pipeline
+- Use torchvision.transforms for preprocessing pipelines
+- Implement proper image normalization (ImageNet standards for pretrained models)
+- Always validate image formats and sizes before processing
+- Use PIL or OpenCV for robust image loading and conversion
+- Implement proper error handling for corrupted images
+
+# Model Serving Patterns
+- Implement model warmup on startup to avoid cold starts
+- Use batch processing for multiple image inference
+- Implement proper model versioning and A/B testing
+- Cache model outputs for identical inputs
+- Monitor model performance and accuracy metrics
+
+## FastAPI CV Patterns
+
+# Image Upload Handling
+- Use FastAPI File upload with proper validation
+- Implement async file processing for large images
+- Validate file types, sizes, and image formats
+- Use streaming for large file uploads
+- Implement proper cleanup of temporary files
+
+# Response Optimization
+- Return confidence scores with predictions
+- Include bounding boxes for object detection models
+- Implement result caching with Redis
+- Use proper HTTP status codes for different scenarios
+- Include processing metadata (inference time, model version)
+
+# Memory Management
+- Implement proper tensor cleanup after inference
+- Use context managers for GPU memory management
+- Monitor CUDA memory usage in production
+- Implement garbage collection for large batches
+- Clear model cache when memory pressure is high
+
+## Performance Optimization
+
+# Inference Optimization
+- Use TensorRT or ONNX for model optimization
+- Implement dynamic batching for concurrent requests
+- Use half precision (fp16) when possible
+- Implement model quantization for edge deployment
+- Cache preprocessed images when appropriate
+
+# Scaling Patterns
+- Implement request queuing for high load
+- Use multiple worker processes for CPU inference
+- Implement horizontal scaling with load balancing
+- Monitor queue lengths and processing times
+- Implement circuit breakers for external dependencies
+
+# Resource Management
+- Monitor GPU utilization and temperature
+- Implement proper resource cleanup
+- Use connection pooling for databases
+- Implement health checks for models and dependencies
+- Monitor disk space for temporary files
+
+## Error Handling & Validation
+
+# Input Validation
+- Validate image dimensions and file sizes
+- Check for supported image formats (JPEG, PNG, etc.)
+- Implement proper error messages for invalid inputs
+- Validate model input requirements (channels, size)
+- Handle edge cases (very small/large images)
+
+# Model Error Handling
+- Implement fallback models for critical failures
+- Handle CUDA out-of-memory errors gracefully
+- Implement retry logic for transient failures
+- Log model errors with proper context
+- Monitor model accuracy drift over time
+
+# Production Monitoring
+- Track inference latency and throughput
+- Monitor model accuracy on validation sets
+- Alert on unusual prediction patterns
+- Track resource utilization (CPU, GPU, memory)
+- Implement model performance dashboards
+
+## Common Patterns
+
+# Model Loading
+def load_model(model_path: str, device: str = "cpu"):
+    """Load and optimize model for inference."""
+    # Load model with proper error handling
+    # Move to appropriate device
+    # Set to evaluation mode
+    # Apply optimizations (scripting, etc.)
+    # Return ready-to-use model
+
+# Image Preprocessing
+def preprocess_image(image: PIL.Image, target_size: tuple):
+    """Preprocess image for model inference."""
+    # Resize and normalize image
+    # Convert to tensor
+    # Add batch dimension
+    # Move to appropriate device
+    # Return preprocessed tensor
+
+# Batch Inference
+async def batch_predict(images: List[torch.Tensor], model):
+    """Perform batch inference with proper error handling."""
+    # Validate batch size
+    # Perform inference with torch.no_grad()
+    # Handle memory limitations
+    # Return predictions with metadata
+
+# Result Postprocessing
+def postprocess_predictions(outputs: torch.Tensor, threshold: float = 0.5):
+    """Convert model outputs to user-friendly results."""
+    # Apply softmax/sigmoid as needed
+    # Filter by confidence threshold
+    # Format results with class names
+    # Include confidence scores
+    # Return structured results 

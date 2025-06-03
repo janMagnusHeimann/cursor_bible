@@ -1,0 +1,114 @@
+# RAG Chatbot Development Rules
+
+## Core AI/ML Patterns
+
+# LangChain Integration
+- Always use async/await for LangChain operations
+- Implement proper streaming for chat responses using AsyncIterator
+- Use LangChain's built-in retry mechanisms for LLM calls
+- Prefer composition over inheritance for custom chains
+- Always validate LangChain document schemas before processing
+
+# RAG Implementation
+- Use semantic chunking for document preprocessing (prefer RecursiveCharacterTextSplitter)
+- Implement hybrid search (semantic + keyword) for better retrieval
+- Always include metadata in vector store documents for filtering
+- Use reranking for improved retrieval quality
+- Implement proper document deduplication logic
+
+# Vector Database Operations
+- Batch vector operations for performance (minimum 10 docs per batch)
+- Implement proper error handling for vector store connectivity
+- Use connection pooling for Pinecone operations
+- Always include namespace isolation for multi-tenant scenarios
+- Implement vector store health checks
+
+## FastAPI Best Practices
+
+# API Structure
+- Use dependency injection for database and vector store connections
+- Implement proper CORS configuration for React frontend
+- Use Pydantic models for all request/response validation
+- Prefer async route handlers for all endpoints
+- Always include request/response examples in OpenAPI docs
+
+# Streaming Responses
+- Use StreamingResponse for chat endpoints
+- Implement Server-Sent Events (SSE) for real-time updates
+- Always include proper error handling in streaming responses
+- Use background tasks for async operations like document ingestion
+
+# Error Handling
+- Create custom exception classes for LLM-specific errors
+- Implement circuit breaker pattern for external API calls
+- Use structured logging with correlation IDs
+- Always return meaningful error messages to frontend
+- Implement proper timeout handling for LLM operations
+
+## Security & Performance
+
+# API Security
+- Implement rate limiting per user/session
+- Validate and sanitize all user inputs
+- Use API key authentication for admin endpoints
+- Implement proper CORS and security headers
+- Never log sensitive user data or API keys
+
+# Performance Optimization
+- Implement caching for frequently accessed documents
+- Use Redis for session management and chat history
+- Implement proper connection pooling for databases
+- Use background tasks for heavy operations
+- Monitor token usage and implement quota management
+
+# Memory Management
+- Implement conversation memory with size limits
+- Use sliding window for long conversations
+- Clear unused vector store connections
+- Implement proper cleanup for temporary files
+
+## Development Workflow
+
+# Testing Patterns
+- Mock LLM responses for deterministic testing
+- Use pytest fixtures for database and vector store setup
+- Implement integration tests for full RAG pipeline
+- Test streaming responses with async test clients
+
+# Code Organization
+- Separate concerns: ingestion, retrieval, generation
+- Use dependency injection containers for configuration
+- Implement factory patterns for different LLM providers
+- Keep chain configurations in separate config files
+
+# Monitoring & Observability
+- Log token usage and costs for each request
+- Track retrieval quality metrics (relevance scores)
+- Monitor response times for each pipeline stage
+- Implement health checks for all external services
+
+## Common Patterns
+
+# Document Processing
+def process_documents(docs: List[Document]) -> List[Document]:
+    """Process documents with proper chunking and metadata."""
+    # Always validate input documents
+    # Use semantic chunking
+    # Preserve original metadata
+    # Return processed documents with unique IDs
+
+# RAG Chain Implementation  
+async def create_rag_chain(vector_store, llm):
+    """Create RAG chain with proper error handling."""
+    # Use async retriever
+    # Implement fallback strategies
+    # Add context compression
+    # Return configured chain
+
+# Streaming Chat Handler
+async def stream_chat_response(query: str, session_id: str):
+    """Stream chat responses with proper error handling."""
+    # Validate session and query
+    # Retrieve relevant context
+    # Stream LLM response
+    # Update conversation memory 
