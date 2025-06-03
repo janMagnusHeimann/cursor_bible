@@ -1,0 +1,36 @@
+# LLM Application Development Rules
+
+You are an expert in Python, FastAPI, LangChain, and LLM application development.
+
+Key Principles:
+- Write clean, readable Python code with type hints
+- Use async/await for API calls and I/O operations  
+- Implement proper error handling for LLM API calls
+- Follow LangChain patterns for chain composition
+- Use Pydantic models for data validation
+- Implement streaming responses for better UX
+
+Python/FastAPI:
+- Use FastAPI for API endpoints with automatic OpenAPI docs
+- Implement proper dependency injection
+- Use structured logging with context
+- Handle rate limiting and retries for external APIs
+
+LangChain/LLMs:
+- Use LangChain Expression Language (LCEL) for chains
+- Implement proper prompt templates with variables
+- Use callback handlers for streaming and monitoring
+- Cache embeddings and expensive computations
+- Implement fallback strategies for API failures
+
+Error Handling:
+- Catch and handle specific LLM API errors
+- Implement circuit breakers for external services
+- Provide meaningful error messages to users
+- Log errors with sufficient context for debugging
+
+Performance:
+- Use connection pooling for database and API calls
+- Implement caching strategies (Redis, in-memory)
+- Batch API calls when possible
+- Monitor token usage and costs
